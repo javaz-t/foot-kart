@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoe_kart/screens/bag.dart';
+import 'package:shoe_kart/screens/login_page.dart';
 import 'package:shoe_kart/screens/product_details.dart';
+import 'package:shoe_kart/screens/registration_page.dart';
 import 'package:shoe_kart/screens/start_page.dart';
 import 'package:shoe_kart/screens/home_page.dart';
 import 'package:shoe_kart/screens/test_screen.dart';
@@ -21,10 +23,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[200],
         textTheme: GoogleFonts.fredokaTextTheme(),
       ),
-      home: //TextPage()
-      //StartPage(),
-      BagPage()
-     // ProductDetailsPage(),
+      home: //const BagPage()
+      //TextPage()
+      StartPage(),
+      //RegistrationPage()
+     // ProductDetailsPage(),  
     );
   }
 }

@@ -3,6 +3,9 @@ import 'package:shoe_kart/screens/product_details.dart';
 import 'package:shoe_kart/widgets/text.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 
+import '../util/const.dart';
+import '../widgets/filter_sheet.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,10 +19,34 @@ class HomePage extends StatelessWidget {
             child: SingleChildScrollView(
                     child: Column(
             children: [
-              const Text(
-                'Foot Kart',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(width: 30,),
+                  const Text(
+                    'Foot Kart',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: IconButton(
+                      onPressed: () {
+                        showModalBottomSheet<void>(
+                          isScrollControlled:true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Filter(); // Assuming `Filter` is a widget that you've defined.
+                          },
+                        );
+                      },
+                      icon: Icon(
+                        Icons.tune_outlined,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+
               Container(
                 margin: EdgeInsets.all(30),
                 decoration: BoxDecoration(
@@ -43,16 +70,15 @@ class HomePage extends StatelessWidget {
                 height: 60,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: footwearBrands.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.all(2),
                         height: 20,
-                        width: 150,
                         decoration: BoxDecoration(
                             color: Colors.blueAccent,
                             borderRadius: BorderRadius.circular(30)),
-                        child: const Row(
+                        child:  Row(
                           children: [
                             SizedBox(
                               width: 5,
@@ -65,8 +91,8 @@ class HomePage extends StatelessWidget {
                               width: 5,
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text('Brand '),
+                              padding: EdgeInsets.only(top: 8,bottom: 8,right: 18,left: 6),
+                              child: Text(footwearBrands[index].toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                             )
                           ],
                         ),

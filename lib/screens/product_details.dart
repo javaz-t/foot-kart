@@ -122,9 +122,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   height: 80,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10,
+                      itemCount: shoeSize.length,
                       itemBuilder: (contex, index) {
-                        int size = index + 2;
                         return Padding(
                           padding:
                               EdgeInsets.symmetric(horizontal: 2, vertical: 10),
@@ -138,7 +137,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             child: CircleAvatar(
                               radius: 35,
                               backgroundColor:selectedIndex!=index?Colors.white:Colors.deepPurple,
-                              child: Text(size.toString(),style: TextStyle(color: selectedIndex!=index?Colors.black:Colors.white),),
+                              child: Text(shoeSize[index].toString(),style: TextStyle(color: selectedIndex!=index?Colors.black:Colors.white),),
                             ),
                           ),
                         );

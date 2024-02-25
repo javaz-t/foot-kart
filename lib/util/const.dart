@@ -44,4 +44,28 @@ const List<String> colorNames = [
   "white",
   ""
 ];
-
+List<String> shoCategory = [
+  'Sneakers',
+  'Ballet Flats',
+  'Boat Shoes',
+  'Brogue Shoes',
+  'Sandals',
+  'Boots',
+  'Loafers',
+  'Pumps',
+  'Oxfords',
+  'Espadrilles',
+];
+List<String>shoeSize = ['6', '7', '8', '9', '10', '11', '12',];
+List<String> footwearBrands = [
+  "Nike",
+  "Adidas",
+  "Puma",
+  "Under Armour",
+  "New Balance",
+  "Asics",
+  "Skechers",
+  "Timberland",
+  "Converse",
+  "Vans",
+];
