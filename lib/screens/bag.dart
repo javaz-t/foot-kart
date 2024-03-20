@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shoe_kart/widgets/Bag/product_count.dart';
+import 'package:shoe_kart/widgets/Bag/text.dart';
+
+import 'package:shoe_kart/widgets/rounded_icon_button.dart';
 import 'package:shoe_kart/widgets/text.dart';
+
+import '../widgets/Bag/bottom_sheet.dart';
+import 'home_page.dart';
 
 class BagPage extends StatelessWidget {
   const BagPage({super.key});
@@ -7,50 +14,7 @@ class BagPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Container(
-        padding: EdgeInsets.only(left: 20,right: 20),
-        height: 220,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-        ),child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Subtotal',style: TextStyle(fontSize: 25,color: Colors.grey),),
-              Text('\$ 1500',style: TextStyle(fontSize: 28,color: Colors.black),),
-           ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-            children: [
-              Text('Delivary',style: TextStyle(fontSize: 25,color: Colors.grey),),
-              Text('\$ 150',style: TextStyle(fontSize: 28,color: Colors.black),),
-            ],
-          ),
-          Divider(color: Colors.grey,endIndent: 15,indent: 15,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-            children: [
-              Text('Total',style: TextStyle(fontSize: 28,color: Colors.black),),
-              Text('\$ 1500',style: TextStyle(fontSize: 28,color: Colors.black),),
-            ],
-          ),
-          Container(
-
-            child:Center(child: Text('Checkout',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 28),),),
-            height: 45,width:double.infinity,decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
-          color: Colors.blueAccent),
-          )
-        ],
-      ),
-      ),
+      bottomSheet: BagBottomSheet(subtotal: '500', delivary: '50', total: '550',),
       body: SafeArea(
         child: Column(
           children: [
@@ -60,21 +24,9 @@ class BagPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios_outlined,
-                    ),
-                  ),
-                ),
-                MediumFont(font: 'My Cart', size: 20),
-                SizedBox(width: 30,)
+             MediumFont(font: 'My Cart', size: 20),
 
-              ],
+                ],
             ),
             SizedBox(
               height: 20,
@@ -96,7 +48,7 @@ class BagPage extends StatelessWidget {
                         Container(
                           height: 120,
                           width: 120,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green),
+                          child: Image.asset('assets/images/sqr.jpg',fit: BoxFit.fill,),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,36 +57,7 @@ class BagPage extends StatelessWidget {
                             PriceFont(
                               price: 1600,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 40,
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.remove_outlined,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  '2',
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.add_circle_outlined,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            ProductCount(),
                           ],
                         ),
                         Column(
@@ -143,11 +66,7 @@ class BagPage extends StatelessWidget {
                             SizedBox(
                               height: 2,
                             ),
-                            Text(
-                              '40',
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold,color: Colors.blueAccent),
-                            ),
+                            SizeText(size: '40'),
                             IconButton(
                               onPressed: () {},
                               icon: Icon(

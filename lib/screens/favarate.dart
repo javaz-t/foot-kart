@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoe_kart/screens/home_page.dart';
+import 'package:shoe_kart/widgets/rounded_icon_button.dart';
 
 import '../widgets/text.dart';
 class FavaratePage extends StatelessWidget {
@@ -16,19 +18,8 @@ class FavaratePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios_outlined,
-                    ),
-                  ),
-                ),
+
                 MediumFont(font: 'My Favorite', size: 20),
-                SizedBox(width: 30,)
 
               ],
             ),
@@ -49,8 +40,7 @@ class FavaratePage extends StatelessWidget {
                       children: [
                         //SizedBox(width: 10,),
                         Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green),
-                          height: 120,
+                          child: Image.asset('assets/images/sqr.jpg',fit: BoxFit.fill,), height: 120,
                           width: 120,
 
                         ),
@@ -70,7 +60,7 @@ class FavaratePage extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: IconButton(
                             onPressed: () {
-                              Navigator.pop(context);
+
                             },
                             icon: Icon(
                               Icons.add_shopping_cart_outlined,size: 35,color: Colors.blueAccent,

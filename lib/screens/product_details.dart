@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart%20';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shoe_kart/screens/bag.dart';
+import 'package:shoe_kart/widgets/rounded_icon_button.dart';
 import 'package:shoe_kart/widgets/text.dart';
-
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../util/const.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({super.key});
+  final DocumentSnapshot productData;
+  const ProductDetailsPage({super.key, required this.productData, });
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -13,7 +20,7 @@ class ProductDetailsPage extends StatefulWidget {
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   int? selectedIndex;
   int selectedColor=0;
-
+PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
 
@@ -31,46 +38,67 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios_outlined,
-                        ),
-                      ),
-                    ),
+                   RoundedIconButton(iconData: Icons.arrow_back_ios_outlined, onPressed: (){Navigator.pop(context);}),
                     MediumFont(font: 'Category of Shoe', size: 20),
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => BagPage()),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.shopping_bag_outlined,
-                        ),
-                      ),
-                    ),
+                   SizedBox(width: 20,)
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 30, left: 10, right: 10, bottom: 10),
                   child: Container(
-                    height: 450,
+                    height:  450, // Adjust the height as needed
                     width: double.infinity,
-                    color: Colors.white,
+                    color: Colors.white, // Background color of the container
+                    child: Stack(
+                      children: [
+                        PageView(
+                          controller: _pageController,
+                          children: [
+                            Container(
+                              height:  450,
+                              width: double.infinity,
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height:  450,
+                              width: double.infinity,
+                              color: Colors.blue,
+                            ),
+                            Container(
+                              height:  450,
+                              width: double.infinity,
+                              color: Colors.yellow,
+                            ),
+                          ],
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SmoothPageIndicator(
+                                controller: _pageController,
+                                count:  3,
+                                effect: ExpandingDotsEffect(
+                                  dotColor: Colors.grey,
+                                  activeDotColor: Colors.blue,
+                                  dotHeight:  8,
+                                  dotWidth:  8,
+                                  expansionFactor:  2,
+                                ),
+                              ),
+                              SizedBox(height: 10,)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Align(
                     alignment: Alignment.bottomLeft,
-                    child: MediumFont(font: 'Product Name')),
+                    child: MediumFont(font:widget.productData['name'])),
                 MediumFont(
                     bold: false,
                     size: 15,
@@ -102,7 +130,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                             },
                             child: CircleAvatar(
-                              backgroundColor: colors[index],
+                              backgroundColor: shoeColors[index],
                             ),
                           ),
                         );

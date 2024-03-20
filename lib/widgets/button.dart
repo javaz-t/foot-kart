@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart ';
+/// blue colored button
 class Button extends StatelessWidget {
-  final Function onTab;
+  final Function onTabb;
   final String text;
-  const Button({super.key, required this.text, required this.onTab,});
+  const Button({super.key, required this.text, required this.onTabb,});
 
   @override
   Widget build(BuildContext context) {
     return  InkWell(
-      onTap: (){onTab();},
+      onTap: (){onTabb();},
       child: Container(
         width: double.infinity,
         height: 60,
-        decoration: BoxDecoration(
+        decoration: BoxDecoration( 
             color: Colors.blue,
-            borderRadius: BorderRadius.circular(30)),
+            borderRadius: BorderRadius.circular(20)),
         child: Center(
           child: Text(
             text,
@@ -28,27 +29,23 @@ class Button extends StatelessWidget {
   }
 }
 
-class GoogleSignIn extends StatelessWidget {
-  const GoogleSignIn({super.key});
+class GoogleLogIn extends StatelessWidget {
+  final Function () googelLogin;
+  const GoogleLogIn({super.key, required this.googelLogin});
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
+  Widget build(BuildContext context) { 
+    return   InkWell(
+      onTap: (){googelLogin();},
       child: Container(
-        width: double.infinity,
-        height: 60,
+        height: 70,
+        width: 70,
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30)),
-        child: Center(
-          child: Text(
-            'Sign In with google',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20 ,
-                color: Colors.black),
-          ),
+      borderRadius: BorderRadius.circular(20),
+      image: const DecorationImage(
+        image: AssetImage('assets/images/google_logo.jpg'),
+        fit: BoxFit.cover,
+      ),
         ),
       ),
     );

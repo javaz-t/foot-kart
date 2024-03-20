@@ -4,18 +4,19 @@ class MediumFont extends StatelessWidget {
   final double size;
   final String font;
   final bool bold;
-   MediumFont ({super.key, required this.font, this.size=25,  this.bold=true, });
+   MediumFont ({super.key, required this.font, this.size=1,  this.bold=true, });
 
   @override
   Widget build(BuildContext context) {
     return Text(font,
+     overflow: TextOverflow.ellipsis, 
         style: TextStyle(
             fontSize: size,
             fontWeight:bold==true? FontWeight.w900: null,
-            color: Colors.grey[700]),overflow: TextOverflow.ellipsis,maxLines: 3,);
+            color: Colors.grey),maxLines: 1,);
   }
 }
-
+//for rupee icon included icon
 class PriceFont extends StatelessWidget {
   final double price;
 
@@ -25,11 +26,12 @@ class PriceFont extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 25,),
+        SizedBox(width: 2,),
         Icon(
-          Icons.currency_rupee_outlined,size: 20,weight: 1000,
+          Icons.currency_rupee_outlined,size: 15,weight: 1000,
         ),
-        Text(price.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color:Colors.grey[800]),)
+        SizedBox(width: 10,),
+        Text(price.toString(),style: TextStyle(fontSize: 15  ,fontWeight: FontWeight.bold,color:Colors.grey[800]),)
       ],
     );
   }
