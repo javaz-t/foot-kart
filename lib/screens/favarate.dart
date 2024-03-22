@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shoe_kart/screens/home_page.dart';
-import 'package:shoe_kart/widgets/rounded_icon_button.dart';
-
 import '../widgets/text.dart';
 class FavaratePage extends StatelessWidget {
   const FavaratePage({super.key});

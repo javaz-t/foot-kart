@@ -13,7 +13,7 @@ class MediumFont extends StatelessWidget {
         style: TextStyle(
             fontSize: size,
             fontWeight:bold==true? FontWeight.w900: null,
-            color: Colors.grey),maxLines: 1,);
+            color: Colors.grey),maxLines: 3 ,);
   }
 }
 //for rupee icon included icon

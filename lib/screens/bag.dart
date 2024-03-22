@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shoe_kart/widgets/Bag/product_count.dart';
 import 'package:shoe_kart/widgets/Bag/text.dart';
-
-import 'package:shoe_kart/widgets/rounded_icon_button.dart';
 import 'package:shoe_kart/widgets/text.dart';
 
 import '../widgets/Bag/bottom_sheet.dart';
-import 'home_page.dart';
-
 class BagPage extends StatelessWidget {
   const BagPage({super.key});
 

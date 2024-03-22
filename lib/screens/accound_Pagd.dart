@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
+import 'package:provider/provider.dart';
+import 'package:shoe_kart/provider/google_sign_provider.dart';
 import 'package:shoe_kart/screens/bag.dart';
 import 'package:shoe_kart/screens/favarate.dart';
+import 'package:shoe_kart/screens/login_page.dart';
+import 'package:shoe_kart/util/const.dart';
 import 'package:shoe_kart/widgets/accound/option_tile.dart';
 import 'package:shoe_kart/widgets/filter/left_align_text.dart';
 
@@ -21,7 +25,26 @@ class AccoundPage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              const LeftAlignText(text: 'Hey userName !'),
+              Consumer<GoogelSignInProvider>(
+                builder: (context,googelPro,child){
+                  String url = googelPro.profileUrl??"";
+                  String userName = googelPro.UserName??"";
+                 return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                 
+              url!=""?CircleAvatar(radius:40,backgroundColor: Colors.amber,backgroundImage:NetworkImage(url) ,):const CircleAvatar(radius:40,backgroundColor: Colors.amber,backgroundImage:AssetImage('assets/images/user.png') ,),
+                  
+                  LeftAlignText(text:userName),
+                 IconButton(onPressed: (){
+                  googelPro.signOut();
+                   Navigator.push(context,MaterialPageRoute(builder: (context) => const LoginPage()),);
+                  
+                 }, icon:const Icon(Icons.logout_sharp),iconSize: 30,color: Colors.red,)
+                
+                ],);
+                }
+              ), 
               const SizedBox(
                 height: 30,
               ),
@@ -90,9 +113,7 @@ class AccoundPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              kHSize20,
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
@@ -110,7 +131,7 @@ class AccoundPage extends StatelessWidget {
                         title: 'Edit Profile ',
                         onTab: () {},
                       ),
-                      Divider(
+                    const  Divider(
                         indent: 20,
                         endIndent: 20,
                       ),
@@ -119,7 +140,7 @@ class AccoundPage extends StatelessWidget {
                         title: 'Saved Cards and Wallets ',
                         onTab: () {},
                       ),
-                      Divider(
+                  const    Divider(
                         indent: 20,
                         endIndent: 20,
                       ),
@@ -128,7 +149,7 @@ class AccoundPage extends StatelessWidget {
                         title: 'Saved Address',
                         onTab: () {},
                       ),
-                      Divider(
+                  const    Divider(
                         indent: 20,
                         endIndent: 20,
                       ),
@@ -137,7 +158,7 @@ class AccoundPage extends StatelessWidget {
                         title: 'Selected Language ',
                         onTab: () {},
                       ),
-                      Divider(
+                   const   Divider(
                         indent: 20,
                         endIndent: 20,
                       ),

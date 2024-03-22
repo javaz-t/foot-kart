@@ -30,13 +30,13 @@ class Button extends StatelessWidget {
 }
 
 class GoogleLogIn extends StatelessWidget {
-  final Function () googelLogin;
-  const GoogleLogIn({super.key, required this.googelLogin});
+  final Function () onTab;
+  const  GoogleLogIn({super.key, required this.onTab});
 
   @override
   Widget build(BuildContext context) { 
     return   InkWell(
-      onTap: (){googelLogin();},
+      onTap: onTab,
       child: Container(
         height: 70,
         width: 70,

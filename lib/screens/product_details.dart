@@ -39,7 +39,7 @@ PageController _pageController = PageController();
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                    RoundedIconButton(iconData: Icons.arrow_back_ios_outlined, onPressed: (){Navigator.pop(context);}),
-                    MediumFont(font: 'Category of Shoe', size: 20),
+                    MediumFont(font:widget.productData['name'], size: 20),
                    SizedBox(width: 20,)
                   ],
                 ),
@@ -103,7 +103,7 @@ PageController _pageController = PageController();
                     bold: false,
                     size: 15,
                     font:
-                        'Elevate your runs with the Nike Air Max 270 React. Boasting a revolutionary cushioning system and a sleek design, these shoes offer unparalleled comfort and style for every stride.'),
+                       widget.productData['description']),
                 SizedBox(
                   height: 20,
                 ),
@@ -150,7 +150,7 @@ PageController _pageController = PageController();
                   height: 80,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: shoeSize.length,
+                      itemCount: widget.productData['sizes'].length,
                       itemBuilder: (contex, index) {
                         return Padding(
                           padding:
@@ -165,7 +165,7 @@ PageController _pageController = PageController();
                             child: CircleAvatar(
                               radius: 35,
                               backgroundColor:selectedIndex!=index?Colors.white:Colors.deepPurple,
-                              child: Text(shoeSize[index].toString(),style: TextStyle(color: selectedIndex!=index?Colors.black:Colors.white),),
+                              child: Text( widget.productData['sizes'][index].toString(),style: TextStyle(color: selectedIndex!=index?Colors.black:Colors.white),),
                             ),
                           ),
                         );
@@ -176,7 +176,7 @@ PageController _pageController = PageController();
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Column(
+                      const Column(
                         children: [
                           Text(
                             'Price',
@@ -208,7 +208,7 @@ PageController _pageController = PageController();
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 color: Colors.deepPurple),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               'Add To Cart',
                               style: TextStyle(
