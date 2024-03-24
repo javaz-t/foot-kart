@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoe_kart/functions/store_logged_vale.dart';
-import 'package:shoe_kart/screens/home_page.dart';
 import 'package:shoe_kart/screens/start_page.dart';
 import 'package:shoe_kart/util/const.dart';
 

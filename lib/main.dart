@@ -5,6 +5,7 @@ import 'package:shoe_kart/functions/display_data.dart';
 import 'package:shoe_kart/functions/store_logged_vale.dart';
 import 'package:shoe_kart/provider/google_sign_provider.dart';
 import 'package:shoe_kart/provider/firebase_auth_provider.dart';
+import 'package:shoe_kart/provider/product_details_provider.dart';
 import 'package:shoe_kart/provider/start_screen_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shoe_kart/screens/login_page.dart';
@@ -38,10 +39,12 @@ class _MyAppState extends State<MyApp> {
       providers: [    
      ChangeNotifierProvider(create: (context)=>StartScreenProvider()),
      ChangeNotifierProvider(create: (context)=>GoogelSignInProvider()),
-     ChangeNotifierProvider(create: (context)=>AuthenticationProvider())
+     ChangeNotifierProvider(create: (context)=>AuthenticationProvider()),
+     ChangeNotifierProvider(create: (context)=>ProductDetailsProvider())
+  
      ],
-     
-      child: MaterialApp(
+      
+      child: MaterialApp( 
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
          scaffoldBackgroundColor: Colors.grey[200],
@@ -57,11 +60,11 @@ class _MyAppState extends State<MyApp> {
             } else {
               return snapshot.data==true?const StartPage():const LoginPage();
             }
-          }   
+          }    
         },
       ),
     )
-    );
+    ); 
   }
 }
                                                               

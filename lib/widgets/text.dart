@@ -11,9 +11,9 @@ class MediumFont extends StatelessWidget {
     return Text(font,
      overflow: TextOverflow.ellipsis, 
         style: TextStyle(
-            fontSize: size,
+            fontSize: size, 
             fontWeight:bold==true? FontWeight.w900: null,
-            color: Colors.grey),maxLines: 3 ,);
+            color: const Color.fromARGB(255, 0, 0, 0)),maxLines: 3 ,);
   }
 }
 //for rupee icon included icon
