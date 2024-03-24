@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
 import 'package:provider/provider.dart';
+import 'package:shoe_kart/functions/store_logged_vale.dart';
 import 'package:shoe_kart/provider/google_sign_provider.dart';
 import 'package:shoe_kart/screens/bag.dart';
 import 'package:shoe_kart/screens/favarate.dart';
@@ -38,6 +39,7 @@ class AccoundPage extends StatelessWidget {
                   LeftAlignText(text:userName),
                  IconButton(onPressed: (){
                   googelPro.signOut();
+                   setUserLoggedIn(false);
                    Navigator.push(context,MaterialPageRoute(builder: (context) => const LoginPage()),);
                   
                  }, icon:const Icon(Icons.logout_sharp),iconSize: 30,color: Colors.red,)

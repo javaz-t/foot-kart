@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
-import 'package:shoe_kart/firebase/firebase_collections.dart';
+import 'package:shoe_kart/functions/display_data.dart';
+import 'package:shoe_kart/model/product_details.dart';
 import 'package:shoe_kart/screens/product_details.dart';
 import 'package:shoe_kart/widgets/text.dart';
 
@@ -9,15 +10,10 @@ class ProductDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  StreamBuilder(
-                  stream: productRef.snapshots(),
-                  builder: (context,snapshot){
-  List<QueryDocumentSnapshot<Object?>>productQueryDocumentSnapshot = snapshot.data!.docs;
-                    
-                    return GridView.builder(
+    return   GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: productQueryDocumentSnapshot.length,
+                      itemCount:productsShowInUI.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -25,13 +21,14 @@ class ProductDisplay extends StatelessWidget {
                               crossAxisSpacing: 8,
                               mainAxisSpacing: 8),
                       itemBuilder: (BuildContext context, int index) {
-                         DocumentSnapshot productData = productQueryDocumentSnapshot[index];
+                      ProductDetails data =  productsShowInUI[index];
+                        // DocumentSnapshot productData = productsShowInUI[index] as DocumentSnapshot<Object?>;
                         return InkWell(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ProductDetailsPage(productData: productQueryDocumentSnapshot[index],)),
+                                  builder: (context) => ProductDetailsPage(productData: data,)),
                             );
                           },
                           child: Card(
@@ -47,7 +44,7 @@ class ProductDisplay extends StatelessWidget {
                                     height: 160, 
                                     width: 165,
                                     child: Image.network(
-                                      productData['images'][0],
+                                     data.images[0],
                                       fit: BoxFit.fitWidth,
                                     ),
                                   ),
@@ -59,17 +56,17 @@ class ProductDisplay extends StatelessWidget {
                                     child: Align(
                                         alignment: Alignment.bottomLeft,
                                         child: MediumFont(
-                                          font: productData['name'],
+                                          font: data.name,
                                           size: 15,
                                         )),
                                   ),
-                                  PriceFont(price: productData['price'])
+                                  PriceFont(price: data.price)
                                 ],
                               ),
                             ),
                           ),
                         );
                       });
-                  } );
+                
   }
 }

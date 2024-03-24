@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shoe_kart/firebase/firebase_collections.dart';
+import 'package:shoe_kart/functions/display_data.dart';
+import 'package:shoe_kart/model/logo_model.dart';
 
 class LogoDisplay extends StatelessWidget {
   const LogoDisplay({super.key});
@@ -9,18 +11,12 @@ class LogoDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return  SizedBox(
                   height: 60,
-                  child: StreamBuilder<QuerySnapshot>(
-                      stream: logoRef.snapshots(),
-                      builder: ((context, snapshot) {
-                        List<QueryDocumentSnapshot<Object?>>
-                            logoQueryDocumentSnapshot = snapshot.data!.docs;
-
-                        return ListView.builder(
+                  child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: logoQueryDocumentSnapshot.length,
+                            itemCount: logoList.length,
                             itemBuilder: (context, index) {
-                              DocumentSnapshot logoDetails =
-                                  logoQueryDocumentSnapshot[index];
+                              LogoModelClass logoDetails =
+                                  logoList[index];
 
                               return Container(
                                 margin: const EdgeInsets.all(2),
@@ -39,7 +35,7 @@ class LogoDisplay extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
-                                          image: NetworkImage(logoDetails['logoUrl']),
+                                          image: NetworkImage(logoDetails.logoUrl),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -54,7 +50,7 @@ class LogoDisplay extends StatelessWidget {
                                           right: 18,
                                           left: 6),
                                       child: Text(
-                                        logoDetails['logoName'],
+                                        logoDetails.logoName,
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
@@ -64,8 +60,7 @@ class LogoDisplay extends StatelessWidget {
                                   ],
                                 ),
                               );
-                            });
-                      })),
+                            })
                 );
   }
 }

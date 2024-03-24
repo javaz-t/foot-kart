@@ -17,7 +17,7 @@ class DividerText extends StatelessWidget {
       ),
     ),
     Text(
-      " OR ",
+      text,
       style: TextStyle(color: Colors.blueGrey),
     ),
     Expanded(

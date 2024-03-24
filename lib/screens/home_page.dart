@@ -1,14 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
-import 'package:shoe_kart/screens/login_page.dart';
 import 'package:shoe_kart/widgets/home/brand_ads.dart';
 import 'package:shoe_kart/widgets/home/filter_button.dart';
 import 'package:shoe_kart/widgets/home/logo_disply.dart';
 import 'package:shoe_kart/widgets/home/product_display.dart';
-
-import 'package:shoe_kart/widgets/sign_up.dart';
-
+import 'package:shoe_kart/widgets/login/sign_up.dart';
 import '../widgets/home/search_bar.dart';
 
 class HomePage extends StatelessWidget {

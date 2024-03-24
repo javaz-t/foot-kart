@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shoe_kart/functions/store_logged_vale.dart';
 
 class GoogelSignInProvider extends ChangeNotifier{
   final googelSignIn = GoogleSignIn();
@@ -24,8 +25,8 @@ class GoogelSignInProvider extends ChangeNotifier{
      if(user!=null){
       profileUrl = user.photoUrl;
        UserName = user.displayName;
-
-     }
+        setUserLoggedIn(true);
+    }
      
      notifyListeners();
   }

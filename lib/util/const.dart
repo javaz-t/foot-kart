@@ -77,3 +77,8 @@ List<String> footwearBrands = [
   "Converse",
   "Vans",
 ];
+
+ void showMySnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }

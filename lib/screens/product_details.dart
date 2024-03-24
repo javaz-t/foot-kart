@@ -1,23 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
-import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shoe_kart/model/product_details.dart';
 import 'package:shoe_kart/screens/bag.dart';
 import 'package:shoe_kart/widgets/rounded_icon_button.dart';
 import 'package:shoe_kart/widgets/text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../util/const.dart';
 
-class ProductDetailsPage extends StatefulWidget {
-  final DocumentSnapshot productData;
-  const ProductDetailsPage({super.key, required this.productData, });
 
-  @override
-  State<ProductDetailsPage> createState() => _ProductDetailsPageState();
-}
-class _ProductDetailsPageState extends State<ProductDetailsPage> {
+class ProductDetailsPage extends StatelessWidget {
+  final ProductDetails productData;
+     ProductDetailsPage({super.key, required this.productData, });
+
   int? selectedIndex;
   int selectedColor=0;
 PageController _pageController = PageController();
@@ -32,15 +27,13 @@ PageController _pageController = PageController();
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 10,
-                ),
+               kHSize10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                    RoundedIconButton(iconData: Icons.arrow_back_ios_outlined, onPressed: (){Navigator.pop(context);}),
-                    MediumFont(font:widget.productData['name'], size: 20),
-                   SizedBox(width: 20,)
+                    MediumFont(font:productData.name, size: 20),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border_outlined,size: 35  ,))
                   ],
                 ),
                 Padding(
@@ -50,27 +43,20 @@ PageController _pageController = PageController();
                     height:  450, // Adjust the height as needed
                     width: double.infinity,
                     color: Colors.white, // Background color of the container
-                    child: Stack(
+                    child:         
+                    Stack(
                       children: [
-                        PageView(
+                        PageView.builder(
+                          itemCount: productData.images.length,
                           controller: _pageController,
-                          children: [
-                            Container(
-                              height:  450,
-                              width: double.infinity,
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height:  450,
-                              width: double.infinity,
-                              color: Colors.blue,
-                            ),
-                            Container(
-                              height:  450,
-                              width: double.infinity,
-                              color: Colors.yellow,
-                            ),
-                          ],
+                       itemBuilder: (context, index) {
+                         return Container(
+                    height:  450, // Adjust the height as needed
+                    width: double.infinity,
+                    color: Colors.white, // Background color of the container
+                    child:Image.network(productData.images[index])
+                    );
+                       },
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
@@ -79,8 +65,8 @@ PageController _pageController = PageController();
                             children: [
                               SmoothPageIndicator(
                                 controller: _pageController,
-                                count:  3,
-                                effect: ExpandingDotsEffect(
+                                count:  productData.images.length,
+                                effect: const ExpandingDotsEffect(
                                   dotColor: Colors.grey,
                                   activeDotColor: Colors.blue,
                                   dotHeight:  8,
@@ -88,7 +74,7 @@ PageController _pageController = PageController();
                                   expansionFactor:  2,
                                 ),
                               ),
-                              SizedBox(height: 10,)
+                            kHSize10
                             ],
                           ),
                         ),
@@ -98,12 +84,12 @@ PageController _pageController = PageController();
                 ),
                 Align(
                     alignment: Alignment.bottomLeft,
-                    child: MediumFont(font:widget.productData['name'])),
+                    child: MediumFont(font:productData.name)),
                 MediumFont(
                     bold: false,
                     size: 15,
                     font:
-                       widget.productData['description']),
+                       productData.description),
                 SizedBox(
                   height: 20,
                 ),
@@ -124,9 +110,9 @@ PageController _pageController = PageController();
                               EdgeInsets.symmetric(horizontal: 2, vertical: 10),
                           child: InkWell(
                             onTap: (){
-                             setState(() {
+                           
                                selectedColor= index;
-                             });
+                            
 
                             },
                             child: CircleAvatar(
@@ -150,7 +136,7 @@ PageController _pageController = PageController();
                   height: 80,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: widget.productData['sizes'].length,
+                      itemCount: productData.sizes.length,
                       itemBuilder: (contex, index) {
                         return Padding(
                           padding:
@@ -158,14 +144,14 @@ PageController _pageController = PageController();
                           child: InkWell(
                           borderRadius: BorderRadius.circular(60),
                             onTap: (){
-                              setState(() {
+                              
                                 selectedIndex = index;
-                              });
+                              
                             },
                             child: CircleAvatar(
                               radius: 35,
                               backgroundColor:selectedIndex!=index?Colors.white:Colors.deepPurple,
-                              child: Text( widget.productData['sizes'][index].toString(),style: TextStyle(color: selectedIndex!=index?Colors.black:Colors.white),),
+                              child: Text( productData.sizes[index].toString(),style: TextStyle(color: selectedIndex!=index?Colors.black:Colors.white),),
                             ),
                           ),
                         );
@@ -176,9 +162,9 @@ PageController _pageController = PageController();
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Column(
+                       Column(
                         children: [
-                          Text(
+                         const Text(
                             'Price',
                             style: TextStyle(
                                 fontSize: 20,
@@ -186,8 +172,8 @@ PageController _pageController = PageController();
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '1400',
-                            style: TextStyle(
+                            productData.price.toString(),
+                            style: const TextStyle(
                                 fontSize: 35,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
@@ -219,7 +205,9 @@ PageController _pageController = PageController();
                           ))
                     ],
                   ),
-                )
+                ),
+                kVSize30,
+
               ],
             ),
           ),
@@ -227,4 +215,5 @@ PageController _pageController = PageController();
       ),
     );
   }
+  
 }

@@ -37,7 +37,7 @@ class LeftAlignText extends StatelessWidget {
         alignment: Alignment.bottomLeft,
         child: Text(
           text,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+          style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
         ));
   }
 }
@@ -53,10 +53,10 @@ class ButtomText extends StatelessWidget {
     return  Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(text,style: TextStyle(color: Colors.black),),
+        Text(text,style:const TextStyle(color: Colors.black),),
         TextButton(onPressed: (){
           onTab();
-        }, child: Text(textButton,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
+        }, child: Text(textButton,style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
       ],
     );
   }

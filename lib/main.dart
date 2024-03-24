@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shoe_kart/functions/display_data.dart';
+import 'package:shoe_kart/functions/store_logged_vale.dart';
 import 'package:shoe_kart/provider/google_sign_provider.dart';
-import 'package:shoe_kart/provider/sign_up_Provider.dart';
+import 'package:shoe_kart/provider/firebase_auth_provider.dart';
 import 'package:shoe_kart/provider/start_screen_provider.dart';
-import 'package:shoe_kart/screens/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shoe_kart/screens/login_page.dart';
+import 'package:shoe_kart/screens/start_page.dart';
 import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,24 +17,50 @@ Future<void> main() async {
   );
   runApp(const MyApp());
 }
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+          fetchAds();
+          fetchLogo();
+          fetchProduct();  
+    super.initState();
+  }    
+  @override 
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+      providers: [    
      ChangeNotifierProvider(create: (context)=>StartScreenProvider()),
      ChangeNotifierProvider(create: (context)=>GoogelSignInProvider()),
-     ChangeNotifierProvider(create: (context)=>SignUpProvider())
+     ChangeNotifierProvider(create: (context)=>AuthenticationProvider())
      ],
      
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
          scaffoldBackgroundColor: Colors.grey[200],
           textTheme: GoogleFonts.fredokaTextTheme(),
         ),
-        home: const LoginPage()  ),
+        home:FutureBuilder(future: isUserLoggedIn(), 
+         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else {
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              return snapshot.data==true?const StartPage():const LoginPage();
+            }
+          }   
+        },
+      ),
+    )
     );
   }
 }
