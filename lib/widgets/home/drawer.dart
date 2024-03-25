@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:shoe_kart/screens/bag.dart';
+import 'package:shoe_kart/screens/card_page.dart';
 import 'package:shoe_kart/screens/favarate.dart';
 import 'package:shoe_kart/screens/home_page.dart';
 
@@ -15,7 +15,7 @@ class DrawerEnable extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
       // Drawer header
-      DrawerHeader(
+      const DrawerHeader(
       decoration: BoxDecoration(
       color: Colors.blueAccent,
       ),
@@ -50,7 +50,7 @@ class DrawerEnable extends StatelessWidget {
     ListTile(
     leading: Icon(Icons.shopping_cart),
     title: Text('Cart'),
-    onTap:  () => Navigator.push(context, MaterialPageRoute(builder: (context) =>BagPage() )),// Close drawer on tap
+    onTap:  () => Navigator.push(context, MaterialPageRoute(builder: (context) =>BagPage('') )),// Close drawer on tap
     ),
     ListTile(
     leading: Icon(Icons.settings),

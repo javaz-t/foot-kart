@@ -3,7 +3,7 @@ import 'package:flutter/material.dart%20';
 import 'package:provider/provider.dart';
 import 'package:shoe_kart/functions/store_logged_vale.dart';
 import 'package:shoe_kart/provider/google_sign_provider.dart';
-import 'package:shoe_kart/screens/bag.dart';
+import 'package:shoe_kart/screens/card_page.dart';
 import 'package:shoe_kart/screens/favarate.dart';
 import 'package:shoe_kart/screens/login_page.dart';
 import 'package:shoe_kart/util/const.dart';
@@ -12,8 +12,8 @@ import 'package:shoe_kart/widgets/filter/left_align_text.dart';
 
 import '../widgets/accound/outline_button.dart';
 
-class AccoundPage extends StatelessWidget {
-  const AccoundPage({super.key});
+class Accound extends StatelessWidget {
+  const Accound({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class AccoundPage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => BagPage()),
+                                    builder: (context) => BagPage('')),
                               );
                             },
                           ),

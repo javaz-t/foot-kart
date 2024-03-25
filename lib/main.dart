@@ -13,7 +13,7 @@ import 'package:shoe_kart/screens/start_page.dart';
 import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  await Firebase.initializeApp( 
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
@@ -27,7 +27,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
+  void initState() {   
           fetchAds();
           fetchLogo();
           fetchProduct();  
@@ -40,10 +40,9 @@ class _MyAppState extends State<MyApp> {
      ChangeNotifierProvider(create: (context)=>StartScreenProvider()),
      ChangeNotifierProvider(create: (context)=>GoogelSignInProvider()),
      ChangeNotifierProvider(create: (context)=>AuthenticationProvider()),
-     ChangeNotifierProvider(create: (context)=>ProductDetailsProvider())
-  
+     ChangeNotifierProvider(create: (context)=>ProductDetailsProvider()),
      ],
-      
+       
       child: MaterialApp( 
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

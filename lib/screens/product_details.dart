@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_kart/model/product_details.dart';
 import 'package:shoe_kart/provider/product_details_provider.dart';
-import 'package:shoe_kart/screens/bag.dart';
+import 'package:shoe_kart/screens/card_page.dart';
 import 'package:shoe_kart/widgets/rounded_icon_button.dart';
 import 'package:shoe_kart/widgets/text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -22,6 +23,7 @@ class ProductDetailsPage extends StatelessWidget {
   PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
+    final cardData = Provider.of<ProductDetailsProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -123,7 +125,7 @@ class ProductDetailsPage extends StatelessWidget {
                         font: 'Colors',
                         size: 20,
                       )),
-                  Container(
+                  SizedBox(
                     height: 60,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -165,22 +167,22 @@ class ProductDetailsPage extends StatelessWidget {
                         itemCount: productData.sizes.length,
                         itemBuilder: (contex, index) {
                           return Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding:const EdgeInsets.symmetric(
                                 horizontal: 2, vertical: 10),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(60),
                               onTap: () {
-                                selectedIndex = index;
+                                cardData.sizeSelecter(index);
                               },
                               child: CircleAvatar(
                                 radius: 35,
-                                backgroundColor: selectedIndex != index
+                                backgroundColor: cardData.selectedSize  != index
                                     ? Colors.white
                                     : Colors.deepPurple,
                                 child: Text(
                                   productData.sizes[index].toString(),
                                   style: TextStyle(
-                                      color: selectedIndex != index
+                                      color:cardData.selectedSize != index
                                           ? Colors.black
                                           : Colors.white),
                                 ),
@@ -189,7 +191,7 @@ class ProductDetailsPage extends StatelessWidget {
                           );
                         }),
                   ),
-                  Container(
+                  SizedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -212,29 +214,30 @@ class ProductDetailsPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>const BagPage()),
-                              );
-                            },
-                            child: Container(
-                              height: 50,
-                              width: 170,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.deepPurple),
-                              child: const Center(
-                                  child: Text(
-                                'Add To Cart',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 20),
-                              )),
-                            ))
+                         GestureDetector(
+                              onTap: () {
+                                detailsCtrl.addToCard(productData.id, productData.name, productData.images[0],
+                                 productData.price, detailsCtrl.selectedSize.toString(), detailsCtrl.quantiy);
+                                cardData.addData(productData); 
+      
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>  BagPage(cardData.selectedSize.toString() ,)));
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 170,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.deepPurple),
+                                child: const Center(
+                                    child: Text(
+                                  'Add To Cart',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 20),
+                                )),
+                              ),
+                            )
                       ],
                     ),
                   ),

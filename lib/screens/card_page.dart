@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoe_kart/functions/display_data.dart';
+import 'package:shoe_kart/model/card_model.dart';
+import 'package:shoe_kart/provider/product_details_provider.dart';
 import 'package:shoe_kart/widgets/Bag/product_count.dart';
 import 'package:shoe_kart/widgets/Bag/text.dart';
 import 'package:shoe_kart/widgets/text.dart';
 
 import '../widgets/Bag/bottom_sheet.dart';
-class BagPage extends StatelessWidget {
-  const BagPage({super.key});
+class BagPage extends StatelessWidget {    
+  final String size;
+   BagPage(String string, {super.key,  this.size='10',});
 
   @override
   Widget build(BuildContext context) {
+    fetchCard();
+  
+    var data = Provider.of<ProductDetailsProvider>(context,listen: false);
     return Scaffold(
-      bottomSheet: BagBottomSheet(subtotal: '500', delivary: '50', total: '550',),
+      bottomSheet: BagBottomSheet(subtotal:data.productSubtotal.toString(), delivary:data.totalDelivaryCharge.toString(),
+       total: data.total.toString(),),
       body: SafeArea(
         child: Column(
           children: [
@@ -24,13 +33,14 @@ class BagPage extends StatelessWidget {
 
                 ],
             ),
-            SizedBox(
+          const  SizedBox(
               height: 20,
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: cardList.length,
                 itemBuilder: (context, index) {
+                  CardModel data = cardList[index];
                   return Container(
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.white),
                     margin: EdgeInsets.all(6),
@@ -44,16 +54,16 @@ class BagPage extends StatelessWidget {
                         Container(
                           height: 120,
                           width: 120,
-                          child: Image.asset('assets/images/sqr.jpg',fit: BoxFit.fill,),
+                          child: Image.network(data.imageUrl,fit: BoxFit.fill,),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            MediumFont(font: 'NIke Shoes24'),
+                            MediumFont(font: data.name),
                             PriceFont(
-                              price: 1600,
+                              price: data.price,
                             ),
-                            ProductCount(),
+                            ProductCount(data: data,),
                           ],
                         ),
                         Column(
@@ -62,10 +72,10 @@ class BagPage extends StatelessWidget {
                             SizedBox(
                               height: 2,
                             ),
-                            SizeText(size: '40'),
+                            SizeText(size: size),
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete_outline_outlined,
                                 size: 40,color: Colors.red,
                               ),

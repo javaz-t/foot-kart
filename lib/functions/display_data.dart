@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shoe_kart/firebase/firebase_collections.dart';
 import 'package:shoe_kart/model/ads_model.dart';
+import 'package:shoe_kart/model/card_model.dart';
+import 'package:shoe_kart/model/favorate_model.dart';
 import 'package:shoe_kart/model/logo_model.dart';
 import 'package:shoe_kart/model/product_details.dart';
 
@@ -32,7 +35,7 @@ fetchLogo() async {
       final List<LogoModelClass> logoRetreved = adsSnapshot.docs
           .map((doc) => LogoModelClass.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
-      logoList.clear(); 
+      logoList.clear();
       logoList.addAll(logoRetreved);
     } catch (e) {
     // print(e);
@@ -55,5 +58,34 @@ fetchProduct() async {
       productsShowInUI.addAll(allProducts);                   
     } catch (e) {
      print(e);
+    } 
+  }
+
+
+      List<FavoriteModel> favoriteList=[];
+fetchFavorite() async {
+    try {
+      QuerySnapshot favSnap = await favRef.get();
+      final List<FavoriteModel> favRetreved = favSnap.docs
+          .map((doc) => FavoriteModel.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      favoriteList.clear();
+      favoriteList.addAll(favRetreved);
+    } catch (e) {
+    // print(e);
+    } 
+  }
+
+List<CardModel> cardList=[];
+  fetchCard()async{
+    try {
+      QuerySnapshot cardSnap = await cardRef.get();
+      final List<CardModel> cardRetreved = cardSnap.docs
+          .map((doc) => CardModel.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      cardList.clear();
+      cardList.addAll(cardRetreved);
+    } catch (e) {
+    // print(e);
     } 
   }

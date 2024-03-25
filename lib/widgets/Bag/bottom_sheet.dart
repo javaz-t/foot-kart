@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoe_kart/screens/payment_screen.dart';
 
 import '../button.dart';
 class BagBottomSheet extends StatelessWidget {
@@ -42,14 +43,16 @@ class BagBottomSheet extends StatelessWidget {
             Text('Total',style: TextStyle(fontSize: 28,color: Colors.black),),
             Row(
               children: [
-                Icon(Icons.currency_rupee),
-                Text(total,style: TextStyle(fontSize: 28,color: Colors.black),),
+                const Icon(Icons.currency_rupee),
+                Text(total,style:const TextStyle(fontSize: 28,color: Colors.black),),
               ],
             )
 
           ],
         ),
-        Button(text: 'Checkout', onTabb: (){})
+        Button(text: 'Checkout', onTabb: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentScreen()));
+        })
       ],
     ),
     );
