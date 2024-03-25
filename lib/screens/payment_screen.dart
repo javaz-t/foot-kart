@@ -65,7 +65,7 @@ class _PaymentPageState extends State<PaymentPage> {
      return  Align(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Wrap(
             children: apps!.map<Widget>((UpiApp app) {
               return GestureDetector(
@@ -198,9 +198,7 @@ class _PaymentPageState extends State<PaymentPage> {
                    return const Center(
                     child: Text(''),
                   );
-
-                }
-                 
+                  }
               },
             ),
           )

@@ -27,12 +27,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {   
-          fetchAds();
+  void initState() {  
+       fetchProduct();    
+           fetchAds();
           fetchLogo();
-          fetchProduct();  
     super.initState();
-  }    
+  }       
   @override 
   Widget build(BuildContext context) {
     return MultiProvider(

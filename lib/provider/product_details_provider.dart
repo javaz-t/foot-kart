@@ -7,7 +7,7 @@ import 'package:shoe_kart/model/favorate_model.dart';
 import 'package:shoe_kart/model/product_details.dart';   
 
 class ProductDetailsProvider extends ChangeNotifier{
-
+List<ProductDetails> productsShowInUI=allProducts;
   double productSubtotal=0;
     double totalDelivaryCharge=0;
     double total=0;
@@ -101,6 +101,27 @@ async {
   }
 }
 //remove from card
+
+
+//search functionality
+ search(String query) {
+    if (query.isEmpty) {
+      productsShowInUI = allProducts; 
+      notifyListeners();// Correct way to update an observable list
+    } else {
+      String lowSearch = query.toLowerCase();
+      productsShowInUI = allProducts
+          .where((product) => product.name.toLowerCase().contains(lowSearch))
+          .toList();
+          notifyListeners();
+    }
+
+  }
+
+
+
+
+
 
 }
 

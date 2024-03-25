@@ -6,7 +6,7 @@ import 'package:shoe_kart/provider/start_screen_provider.dart';
 class StartPage extends StatelessWidget {
    const StartPage({super.key});
   @override
-  Widget build(BuildContext context) {   
+  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Consumer<StartScreenProvider>(
         builder: (context,startCtrl,child)=>

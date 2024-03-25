@@ -10,6 +10,7 @@ import 'package:shoe_kart/model/product_details.dart';
 final CollectionReference adsRef = FirebaseFirestore.instance.collection('Ads Data');
  
 
+List<ProductDetails>allProducts=[]; 
 List<AdsModel> adsList=[];
 fetchAds() async {
     try {
@@ -41,25 +42,23 @@ fetchLogo() async {
     // print(e);
     } 
   }
-
- 
-List<ProductDetails> productsShowInUI=[];
-List<ProductDetails>allProducts=[]; 
-  final CollectionReference productCollection =
+    final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('Product Data');
-fetchProduct() async {
+
+     fetchProduct() async {
     try {
       QuerySnapshot productSnapshot = await productCollection.get();
       final List<ProductDetails> retrievedProducts = productSnapshot.docs
           .map((doc) => ProductDetails.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
       allProducts.clear(); 
-      allProducts.addAll(retrievedProducts);
-      productsShowInUI.addAll(allProducts);                   
+      allProducts.addAll(retrievedProducts);                  
     } catch (e) {
      print(e);
     } 
   }
+
+ 
 
 
       List<FavoriteModel> favoriteList=[];
@@ -89,3 +88,4 @@ List<CardModel> cardList=[];
     // print(e);
     } 
   }
+ 
