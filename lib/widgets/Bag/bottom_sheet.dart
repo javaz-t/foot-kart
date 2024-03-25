@@ -51,7 +51,7 @@ class BagBottomSheet extends StatelessWidget {
           ],
         ),
         Button(text: 'Checkout', onTabb: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> PaymentPage()));
         })
       ],
     ),

@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_kart/provider/google_sign_provider.dart';
 import 'package:shoe_kart/provider/firebase_auth_provider.dart';
-import 'package:shoe_kart/screens/home_page.dart';
 import 'package:shoe_kart/screens/login_page.dart';
 import 'package:shoe_kart/screens/start_page.dart';
 import 'package:shoe_kart/util/const.dart';
 import 'package:shoe_kart/widgets/divider_text.dart';
-
 import '../widgets/button.dart';
 import '../widgets/login/sign_up.dart';
 
@@ -48,23 +45,28 @@ class RegistrationPage extends StatelessWidget {
                         validator: (value) {
                           String name = regCtrl.nameController.text;
                           bool isValidUsername(String username) {
-  // The username should contain only lowercase letters and digits
-  Pattern pattern = r'^[a-z0-9]+$';
-  RegExp regex = RegExp(pattern.toString());
+                            // The username should contain only lowercase letters and digits
+                            Pattern pattern = r'^[a-z0-9]+$';
+                            RegExp regex = RegExp(pattern.toString());
 
-  // Count the number of digits in the username
-  int digitCount = username.split('').where((char) => '0123456789'.contains(char)).length;
+                            // Count the number of digits in the username
+                            int digitCount = username
+                                .split('')
+                                .where((char) => '0123456789'.contains(char))
+                                .length;
 
-  // The username should be more than 5 characters long, contain only lowercase letters and digits,
-  // and have a maximum of 3 digits
-  return regex.hasMatch(username) && username.length > 5 && digitCount <= 3;
- 
-}
- if(isValidUsername(name)){
-    return 'User Name is Ok ';
-  }else {
-    return ' User name contain atlest 5 charactor and atmost 3 digits ';
-  }
+                            // The username should be more than 5 characters long, contain only lowercase letters and digits,
+                            // and have a maximum of 3 digits
+                            return regex.hasMatch(username) &&
+                                username.length > 5 &&
+                                digitCount <= 3;
+                          }
+
+                          if (isValidUsername(name)) {
+                            return 'User Name is Ok ';
+                          } else {
+                            return ' User name contain atlest 5 charactor and atmost 3 digits ';
+                          }
                         },
                         controller: regCtrl.nameController,
                         keyboardType: TextInputType.emailAddress,
@@ -107,14 +109,13 @@ class RegistrationPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20)),
                       child: TextFormField(
                         controller: regCtrl.passController,
-                        validator: (value){
+                        validator: (value) {
                           String pass = regCtrl.passController.text;
-                          if(pass.length>5){
+                          if (pass.length > 5) {
                             return 'Strong password';
+                          } else {
+                            return 'Weak Password';
                           }
-                            else{
-                              return 'Weak Password';
-                            }
                         },
                         decoration: const InputDecoration(
                           hintText: '     Please enter the password',
@@ -128,12 +129,14 @@ class RegistrationPage extends StatelessWidget {
                         onTabb: () {
                           if (formKey.currentState!.validate()) {
                             showMySnackBar(context, 'somethig went wrong');
-}else{
-   regCtrl.registerUsingEmailPassword(context);
+                          } else {
+                            regCtrl.registerUsingEmailPassword(context);
                             Navigator.pushReplacement(
-  context,
-  MaterialPageRoute(builder: (context) => const StartPage()),);
-}
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const StartPage()),
+                            );
+                          }
                         }),
                     kHSize30,
                     const DividerText(
